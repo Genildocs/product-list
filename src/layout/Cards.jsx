@@ -3,7 +3,7 @@ import { useFetchJson } from '../hooks/useFetchJson';
 import clsx from 'clsx';
 
 export default function Cards() {
-  const { data: data, error } = useFetchJson('../data.json');
+  const { data: data, error } = useFetchJson('../../data.json');
 
   return (
     <div>
@@ -22,8 +22,11 @@ export default function Cards() {
             {data !== null &&
               data.map((el, index) => (
                 <div key={el.name}>
-                  <div>
+                  <div className={clsx('md:hidden')}>
                     <img src={el.image.mobile} alt={el.name} />
+                  </div>
+                  <div className={clsx('hidden md:block')}>
+                    <img src={el.image.desktop} alt={el.name} />
                   </div>
                   <div>
                     <Count index={index} data={data} />
