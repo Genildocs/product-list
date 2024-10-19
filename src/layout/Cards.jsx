@@ -10,11 +10,6 @@ export default function Cards() {
       <div className={clsx(error && '!block', 'hidden')}>
         Not found, Error 404
       </div>
-      {data === null && (
-        <div>
-          <p>Carregando</p>
-        </div>
-      )}
       {
         <div className="md:flex-[3]">
           <h1 className="text-3xl font-bold mb-10">Desserts</h1>

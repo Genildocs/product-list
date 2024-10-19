@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useFetchJson } from '../hooks/useFetchJson';
-
+import Btn from './Btn';
 export default function Count({ index, data }) {
   //   const { data: data } = useFetchJson('./data.json');
   const [count, setCount] = useState(Array(data.length).fill(0));
