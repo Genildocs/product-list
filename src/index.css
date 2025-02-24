@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-red-hat-text: 'Red Hat Text', serif;
+}
+
+html,
+body {
+  @apply h-full font-red-hat-text bg-rose-50;
+}
