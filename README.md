@@ -1,8 +1,21 @@
-# React + Vite
+# Aprendizado
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Uso de função com retorno para renderizar imagens de diferentes resoluções dentro de um objeto no loop map.
 
-Currently, two official plugins are available:
+```const getDeviceSize = () => {
+    if (isSmallDevice) return 'mobile';
+    if (isMediumDevice) return 'tablet';
+    if (isLargeDevice) return 'desktop';
+    return 'mobile';
+  };
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+
+```<div>
+    <img
+        src={`${product.image[getDeviceSize()].replace('./assets', '')}`}
+        alt={product.name}
+        className="rounded-lg w-full h-full object-contain"
+    />
+</div>
+```

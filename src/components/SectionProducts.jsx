@@ -1,7 +1,19 @@
 import { useEffect, useState } from 'react';
-
+import { useMediaQuery } from '@uidotdev/usehooks';
 export default function SectionProducts({ children }) {
   const [product, setProduct] = useState([]);
+  const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
+  const isMediumDevice = useMediaQuery(
+    'only screen and (min-width : 769px) and (max-width : 992px)'
+  );
+  const isLargeDevice = useMediaQuery('only screen and (min-width : 993px) ');
+
+  const getDeviceSize = () => {
+    if (isSmallDevice) return 'mobile';
+    if (isMediumDevice) return 'tablet';
+    if (isLargeDevice) return 'desktop';
+    return 'mobile';
+  };
 
   useEffect(() => {
     fetch('/data.json')
@@ -9,17 +21,18 @@ export default function SectionProducts({ children }) {
       .then((data) => setProduct(data))
       .catch((error) => console.log(error));
   }, []);
+
   return (
-    <section className="p-6 md:p-10 lg:p-28">
+    <section>
       {children}
-      <div className=" grid grid-cols-1 md:grid-cols-[repeat(3,minmax(0,13.5rem))] gap-y-5 md:gap-5">
+      <div className=" grid grid-cols-1 md:grid-cols-[repeat(3,minmax(0,13.5rem))] lg:grid-cols-[repeat(3,minmax(0,16rem))] gap-y-5 md:gap-5">
         {product.map((product, index) => (
           <div key={index} className="flex flex-col gap-5">
             <div>
               <img
-                src={product.image.mobile.replace('./assets', '')}
+                src={`${product.image[getDeviceSize()].replace('./assets', '')}`}
                 alt={product.name}
-                className="rounded-lg"
+                className="rounded-lg w-full h-full object-contain"
               />
             </div>
             <div>
@@ -28,7 +41,7 @@ export default function SectionProducts({ children }) {
               </p>
               <p className="font-semibold text-[1rem]">{product.name}</p>
               <p className="text-red-600 font-semibold text-[1rem]">
-                ${product.price}
+                ${product.price.toFixed(2)}
               </p>
             </div>
           </div>
