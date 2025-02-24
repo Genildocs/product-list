@@ -1,10 +1,10 @@
-import teste from '../assets/images/image-panna-cotta-thumbnail.jpg';
 import { useEffect, useState } from 'react';
+
 export default function SectionProducts({ children }) {
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    fetch('data.json')
+    fetch('../../data.json')
       .then((res) => res.json())
       .then((data) => setProduct(data))
       .catch((error) => console.log(error));
