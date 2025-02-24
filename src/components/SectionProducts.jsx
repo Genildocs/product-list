@@ -4,7 +4,7 @@ export default function SectionProducts({ children }) {
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    fetch('../../data.json')
+    fetch('public/data.json')
       .then((res) => res.json())
       .then((data) => setProduct(data))
       .catch((error) => console.log(error));
