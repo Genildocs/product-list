@@ -17,7 +17,7 @@ export default function SectionProducts({ children }) {
           <div key={index} className="flex flex-col gap-5">
             <div>
               <img
-                src={`src/${product.image.mobile}`}
+                src={`${product.image.mobile}`}
                 alt={product.name}
                 className="rounded-lg"
               />
