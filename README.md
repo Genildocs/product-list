@@ -2,7 +2,8 @@
 
 - Uso de função com retorno para renderizar imagens de diferentes resoluções dentro de um objeto no loop map.
 
-```const getDeviceSize = () => {
+```
+const getDeviceSize = () => {
     if (isSmallDevice) return 'mobile';
     if (isMediumDevice) return 'tablet';
     if (isLargeDevice) return 'desktop';
@@ -11,7 +12,8 @@
 
 ```
 
-```<div>
+```
+<div>
     <img
         src={`${product.image[getDeviceSize()].replace('./assets', '')}`}
         alt={product.name}
