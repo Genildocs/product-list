@@ -4,9 +4,17 @@ import { motion } from 'motion/react';
 import IconCart from './svg/IconCart.jsx';
 import IconIcrement from './svg/IconIncrement.jsx';
 import IconDecrement from './svg/IconDecrement.jsx';
-export default function ButtonsCount({ count, setCount }) {
+export default function ButtonsCount({ count, setCount, index }) {
   const [isVisible, setIsVisible] = useState(false);
-  console.log(count);
+
+  const updateCount = () => {
+    setCount((prevCount) => {
+      const newCount = [...prevCount];
+      newCount[index] += 1;
+      return newCount;
+    });
+  };
+
   const filterCard = () => {
     setIsVisible(!isVisible);
   };
@@ -45,9 +53,14 @@ export default function ButtonsCount({ count, setCount }) {
         )}
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 25, opacity: 1, transition: { duration: 0.5 } }}>
-        <IconDecrement count={count} setCount={setCount} />
+        <IconDecrement count={count} setCount={setCount} index={index} />
         <span className="text-white font-bold">{count}</span>
-        <IconIcrement count={count} setCount={setCount} />
+        <IconIcrement
+          count={count}
+          setCount={setCount}
+          index={index}
+          updateCount={updateCount}
+        />
       </motion.button>
     </>
   );

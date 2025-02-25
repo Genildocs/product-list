@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 
-export default function IconIncrement({ count, setCount, idx }) {
+export default function IconIncrement({ count, setCount, index, updateCount }) {
+
   return (
     <div
       className="border-[1px] border-solid border-white rounded-full p-1"
-      onClick={() => setCount((prev) => prev + 1)}>
+      onClick={updateCount}
+      >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="10"

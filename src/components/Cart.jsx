@@ -1,11 +1,13 @@
 import React from 'react';
 
 export default function Cart({ count }) {
+  const total = count.reduce((acc, curr) => acc + curr, 0);
+
   return (
     <section className="lg:w-[350px] ">
       <div className="bg-white p-5 rounded-lg shadow-(--shadow-cart)">
         <span className="font-bold text-2xl text-red-500">
-          Your Cart({count})
+          Your Cart({total})
         </span>
       </div>
     </section>

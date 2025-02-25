@@ -42,7 +42,7 @@ export default function SectionProducts({ children, count, setCount }) {
                 className="rounded-lg w-full h-full object-contain"
               />
               <ButtonsCount
-                count={count}
+                count={count[index]}
                 setCount={setCount}
                 product={product}
                 index={index}

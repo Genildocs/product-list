@@ -1,4 +1,5 @@
-export default function IconDecrement({ count, setCount }) {
+export default function IconDecrement({ count, setCount, index }) {
+
   return (
     <div className="border-[1px] border-solid border-white rounded-full p-1 h-[20px] flex items-center justify-center">
       <svg
