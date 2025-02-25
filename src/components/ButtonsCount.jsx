@@ -7,16 +7,11 @@ import IconDecrement from './svg/IconDecrement.jsx';
 export default function ButtonsCount({ count, setCount, index }) {
   const [isVisible, setIsVisible] = useState(false);
 
-  const updateCount = () => {
-    setCount((prevCount) => {
-      const newCount = [...prevCount];
-      newCount[index] += 1;
-      return newCount;
-    });
-  };
-
   const filterCard = () => {
     setIsVisible(!isVisible);
+    setCount((prevCount) => {
+      return { ...prevCount, [index]: prevCount[index] + 1 };
+    });
   };
 
   const varianstButtons = {
@@ -30,7 +25,7 @@ export default function ButtonsCount({ count, setCount, index }) {
       <motion.button
         className={cn(
           'cursor-pointer w-40 flex items-center gap-2  px-5 py-3  rounded-[50px] absolute bottom-0  translate-x-[50%] border-[1px] border-solid ',
-          isVisible && 'hidden'
+          count === 0 && 'flex'
         )}
         style={{
           backgroundColor: 'rgb(252,252,252)',
@@ -49,18 +44,13 @@ export default function ButtonsCount({ count, setCount, index }) {
       <motion.button
         className={cn(
           'cursor-pointer bg-red-500 w-40 flex items-center justify-between gap-2  px-5 py-3  rounded-[50px] absolute bottom-0  translate-x-[50%] border-[1px] border-solid border-red-500',
-          !isVisible && 'hidden'
+          count === 0 && 'hidden'
         )}
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 25, opacity: 1, transition: { duration: 0.5 } }}>
-        <IconDecrement count={count} setCount={setCount} index={index} />
+        <IconDecrement setCount={setCount} index={index} />
         <span className="text-white font-bold">{count}</span>
-        <IconIcrement
-          count={count}
-          setCount={setCount}
-          index={index}
-          updateCount={updateCount}
-        />
+        <IconIcrement setCount={setCount} index={index} />
       </motion.button>
     </>
   );

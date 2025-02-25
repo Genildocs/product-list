@@ -21,3 +21,29 @@ const getDeviceSize = () => {
     />
 </div>
 ```
+
+- Chamar setCount dentro do loop no useEffect causa renderizações desnecessarias. O ideal é criar um objeto inicial de uma vez só e chamá-lo apenas uma vez, reduzindo re-renders.
+
+```
+useEffect(() => {
+  data.forEach((item, index) => {
+    setCount((prevCount) => ({
+      ...prevCount,
+      [index]: 0, // Define o valor inicial de cada item como 0
+    }));
+  });
+  setProduct(data);
+}, []);
+```
+
+```
+useEffect(() => {
+  const initialCount = data.reduce((acc, _, index) => {
+    acc[index] = 0;
+    return acc;
+  }, {});
+
+  setCount(initialCount); // Atualiza o estado apenas uma vez
+  setProduct(data);
+}, []);
+```
