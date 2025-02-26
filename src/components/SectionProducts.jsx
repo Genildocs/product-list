@@ -35,9 +35,8 @@ export default function SectionProducts({
                 src={`${product.image[getDeviceSize()].replace('./assets', '')}`}
                 alt={product.name}
                 className={cn(
-                  'rounded-lg w-full h-full object-contain border-[1px] border-solid border-transparent transition-all',
-                  count[index] > 0 &&
-                    'border-[1px] border-solid border-rose-500 '
+                  'rounded-lg w-full h-full object-contain border-[3px] border-solid border-transparent transition-all',
+                  count[index] > 0 && 'border-red '
                 )}
               />
               <ButtonsCount

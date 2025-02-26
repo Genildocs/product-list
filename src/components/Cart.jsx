@@ -21,13 +21,15 @@ export default function Cart({ count, products }) {
     setProductsCart(filterProducts);
   }, [count]);
 
+  console.log(productsCart);
+
   return (
-    <section className="lg:w-[350px] ">
+    <section className="lg:w-[350px] mt-5">
       <div className="bg-white p-5 rounded-lg shadow-(--shadow-cart)">
         <span className="font-bold text-2xl text-red-500">
           Your Cart({total})
         </span>
-        <div>
+        <div className="py-3">
           {Object.values(productsCart).map((product, index) => (
             <div key={index}>
               <div className="flex justify-between">
@@ -51,11 +53,11 @@ export default function Cart({ count, products }) {
           ))}
         </div>
         <div className={cn('hidden', total > 0 && 'block')}>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mb-3">
             <span>Order Total</span>
             <span className="font-bold">$46.50</span>
           </div>
-          <div className="bg-rose-50 p-2 flex items-center justify-center gap-2 rounded-lg">
+          <div className="bg-rose-50 p-2 flex items-center justify-center gap-2 rounded-lg mb-3">
             <img src={IconCarbon} alt="icon" />
             <p>
               This is a <strong>carbon-neutral</strong> delivery
