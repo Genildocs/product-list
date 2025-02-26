@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-
+import IconCarbon from '../../public/images/icon-carbon-neutral.svg';
+import { cn } from '../utils';
 export default function Cart({ count, products }) {
   const [productsCart, setProductsCart] = useState({});
   const total = Object.values(count).reduce((acc, curr) => acc + curr, 0);
@@ -26,29 +27,45 @@ export default function Cart({ count, products }) {
           Your Cart({total})
         </span>
         <div>
-          <div>
-            <div>
-              <p>Classic Tiramisu</p>
+          {Object.values(productsCart).map((product, index) => (
+            <div key={index}>
+              <div className="flex justify-between">
+                <div>
+                  <div>
+                    <p className="font-semibold text-sm">{product.name}</p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-red-500 font-bold text-[16px] ">
+                      {product.count}x
+                    </span>
+                    <span>@ ${product.price}</span>
+                    <span>${product.price * product.count}</span>
+                  </div>
+                </div>
+                <div>
+                  <button className="cursor-pointer">X</button>
+                </div>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>Order Total</span>
+                <span className="font-bold">$46.50</span>
+              </div>
+              <div className="bg-rose-50 p-2 flex items-center justify-center gap-2 rounded-lg">
+                <img src={IconCarbon} alt="icon" />
+                <p>
+                  This is a <strong>carbon-neutral</strong> delivery
+                </p>
+              </div>
+              <div>
+                <button
+                  className={cn(
+                    'cursor-pointer bg-red-500 text-white font-bold py-2 w-full rounded-[50px]'
+                  )}>
+                  Confirm Order
+                </button>
+              </div>
             </div>
-            <div>
-              <span>1x</span>
-              <span>@ $5.50</span>
-              <span>$5.50</span>
-            </div>
-          </div>
-          <div>
-            <button>X</button>
-          </div>
-        </div>
-        <div>
-          <span>Order Total</span>
-          <span>$46.50</span>
-        </div>
-        <div>
-          <p>This is a carbon-neutral delivery</p>
-        </div>
-        <div>
-          <button>Confirm Order</button>
+          ))}
         </div>
       </div>
     </section>
