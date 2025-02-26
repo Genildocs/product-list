@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import IconCarbon from '../../public/images/icon-carbon-neutral.svg';
 import { cn } from '../utils';
+import IconEmpentyCart from './svg/IconEmpentyCart';
 export default function Cart({ count, products }) {
   const [productsCart, setProductsCart] = useState({});
   const total = Object.values(count).reduce((acc, curr) => acc + curr, 0);
@@ -46,26 +47,38 @@ export default function Cart({ count, products }) {
                   <button className="cursor-pointer">X</button>
                 </div>
               </div>
-              <div className="flex items-center justify-between">
-                <span>Order Total</span>
-                <span className="font-bold">$46.50</span>
-              </div>
-              <div className="bg-rose-50 p-2 flex items-center justify-center gap-2 rounded-lg">
-                <img src={IconCarbon} alt="icon" />
-                <p>
-                  This is a <strong>carbon-neutral</strong> delivery
-                </p>
-              </div>
-              <div>
-                <button
-                  className={cn(
-                    'cursor-pointer bg-red-500 text-white font-bold py-2 w-full rounded-[50px]'
-                  )}>
-                  Confirm Order
-                </button>
-              </div>
             </div>
           ))}
+        </div>
+        <div className={cn('hidden', total > 0 && 'block')}>
+          <div className="flex items-center justify-between">
+            <span>Order Total</span>
+            <span className="font-bold">$46.50</span>
+          </div>
+          <div className="bg-rose-50 p-2 flex items-center justify-center gap-2 rounded-lg">
+            <img src={IconCarbon} alt="icon" />
+            <p>
+              This is a <strong>carbon-neutral</strong> delivery
+            </p>
+          </div>
+          <div>
+            <button
+              className={cn(
+                'cursor-pointer bg-red-500 text-white font-bold py-2 w-full rounded-[50px]'
+              )}>
+              Confirm Order
+            </button>
+          </div>
+        </div>
+        <div
+          className={cn(
+            'flex flex-col items-center justify-center py-3',
+            total > 0 && 'hidden'
+          )}>
+          <IconEmpentyCart />
+          <p className="text-rose-500 font-bold">
+            Your added items will appear here
+          </p>
         </div>
       </div>
     </section>
