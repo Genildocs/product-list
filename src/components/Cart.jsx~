@@ -11,8 +11,11 @@ export default function Cart({ count, setCount, products }) {
     return acc + curr.price * curr.count;
   }, 0);
 
+
+
   useEffect(() => {
     const filterProducts = products.reduce((acc, curr, index) => {
+
       if (count[index] > 0) {
         // Apenas adiciona se count > 0
         acc[index] = {
@@ -26,7 +29,11 @@ export default function Cart({ count, setCount, products }) {
     setProductsCart(filterProducts);
   }, [count]);
 
-  const updateCart = () => {};
+
+  const updateCart = () => {
+   console.log(productsCart)
+  };
+
 
   return (
     <section className="lg:w-[350px] mt-5">
@@ -53,7 +60,7 @@ export default function Cart({ count, setCount, products }) {
                 <div>
                   <button
                     className="cursor-pointer"
-                    onClick={() => updateCart(product, index)}>
+                    onClick={()=>updateCart(product, index)}>
                     <IconCartRemove />
                   </button>
                 </div>

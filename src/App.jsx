@@ -8,13 +8,6 @@ export default function App() {
   const [count, setCount] = useState({});
 
   useEffect(() => {
-    // data.forEach((item, index) => {
-    //   setCount((prevCount) => ({
-    //     ...prevCount,
-    //     [index]: 0,
-    //   }));
-    // });
-
     const initialCount = data.reduce((acc, _, index) => {
       acc[index] = 0;
       return acc;
@@ -29,7 +22,7 @@ export default function App() {
       <SectionProducts count={count} setCount={setCount} products={product}>
         <h1 className="text-black font-bold text-4xl mb-5">Desserts</h1>
       </SectionProducts>
-      <Cart count={count} products={product} />
+      <Cart count={count} setCount={setCount} products={product} />
     </main>
   );
 }

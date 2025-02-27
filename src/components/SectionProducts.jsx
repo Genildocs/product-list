@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useMediaQuery } from '@uidotdev/usehooks';
 import { cn } from '../utils.js';
 import ButtonsCount from './ButtonsCount';
@@ -29,7 +28,7 @@ export default function SectionProducts({
           'grid grid-cols-1 md:grid-cols-[repeat(3,minmax(0,13.5rem))] lg:grid-cols-[repeat(3,minmax(0,16rem))] gap-y-5 md:gap-5'
         )}>
         {products.map((product, index) => (
-          <div key={index} className="flex flex-col gap-8">
+          <div key={index} className="flex flex-col gap-8 h-full">
             <div className="relative">
               <img
                 src={`${product.image[getDeviceSize()].replace('./assets', '')}`}
