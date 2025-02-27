@@ -26,7 +26,13 @@ export default function Cart({ count, setCount, products }) {
     setProductsCart(filterProducts);
   }, [count]);
 
-  const updateCart = () => {};
+  const updateCart = (index) => {
+    setCount((prevCount) => {
+      const updatedCount = { ...prevCount };
+      updatedCount[index] = 0;
+      return updatedCount;
+    });
+  };
 
   return (
     <section className="lg:w-[350px] mt-5">
@@ -35,7 +41,7 @@ export default function Cart({ count, setCount, products }) {
           Your Cart({totalCart})
         </span>
         <div className="py-3">
-          {Object.values(productsCart).map((product, index) => (
+          {Object.entries(productsCart).map(([index, product]) => (
             <div key={index}>
               <div className="flex items-center justify-between">
                 <div>
@@ -53,7 +59,7 @@ export default function Cart({ count, setCount, products }) {
                 <div>
                   <button
                     className="cursor-pointer"
-                    onClick={() => updateCart(product, index)}>
+                    onClick={() => updateCart(index)}>
                     <IconCartRemove />
                   </button>
                 </div>

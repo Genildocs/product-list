@@ -1,5 +1,6 @@
 import { useMediaQuery } from '@uidotdev/usehooks';
 import { cn } from '../utils.js';
+import { motion } from 'motion/react';
 import ButtonsCount from './ButtonsCount';
 export default function SectionProducts({
   children,
@@ -30,7 +31,7 @@ export default function SectionProducts({
         {products.map((product, index) => (
           <div key={index} className="flex flex-col gap-8 h-full">
             <div className="relative">
-              <img
+              <motion.img
                 src={`${product.image[getDeviceSize()].replace('./assets', '')}`}
                 alt={product.name}
                 className={cn(
