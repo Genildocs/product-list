@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from 'motion/react';
 import IconCarbon from '../../public/images/icon-carbon-neutral.svg';
 import { cn } from '../utils';
 import IconEmpentyCart from './svg/IconEmpentyCart';
@@ -43,7 +44,7 @@ export default function Cart({ count, setCount, products }) {
         <div className="py-3">
           {Object.entries(productsCart).map(([index, product]) => (
             <div key={index}>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between mb-2">
                 <div>
                   <div>
                     <p className="font-semibold text-sm">{product.name}</p>
@@ -57,11 +58,13 @@ export default function Cart({ count, setCount, products }) {
                   </div>
                 </div>
                 <div>
-                  <button
-                    className="cursor-pointer"
+                  <motion.button
+                    className="cursor-pointer border-[1px] border-solid  rounded-full p-1"
+                    style={{ borderColor: 'rgb(173, 137, 133)' }}
+                    whileHover={{ opacity: 0.8 }}
                     onClick={() => updateCart(index)}>
                     <IconCartRemove />
-                  </button>
+                  </motion.button>
                 </div>
               </div>
             </div>
