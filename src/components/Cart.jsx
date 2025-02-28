@@ -1,39 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { motion } from 'motion/react';
-import IconCarbon from '../../public/images/icon-carbon-neutral.svg';
 import { cn } from '../utils';
+import Modal from 'react-modal';
+import { CountProductContext } from '../CountProductContext.jsx';
+import IconCarbon from '../../public/images/icon-carbon-neutral.svg';
 import IconEmpentyCart from './svg/IconEmpentyCart';
-import IconCartRemove from './svg/IconCartRemove.jsx';
-export default function Cart({ count, setCount, products }) {
-  const [productsCart, setProductsCart] = useState({});
-  const totalCart = Object.values(count).reduce((acc, curr) => acc + curr, 0);
+import CartProductFilter from './CartProductFilter.jsx';
+import ModalOrderConfirmed from './ModalOrderConfirmed.jsx';
 
-  const totalPrice = Object.values(productsCart).reduce((acc, curr) => {
-    return acc + curr.price * curr.count;
-  }, 0);
+export default function Cart() {
+  const { count, setCount } = useContext(CountProductContext);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  useEffect(() => {
-    const filterProducts = products.reduce((acc, curr, index) => {
-      if (count[index] > 0) {
-        // Apenas adiciona se count > 0
-        acc[index] = {
-          name: curr.name,
-          price: curr.price,
-          count: count[index],
-        };
+  const { totalCart, totalPrice } = Object.values(count).reduce(
+    (acc, product) => {
+      if (product.count > 0) {
+        acc.totalCart += product.count;
+        acc.totalPrice += product.price * product.count;
       }
       return acc;
-    }, {});
-    setProductsCart(filterProducts);
-  }, [count]);
+    },
+    { totalCart: 0, totalPrice: 0 }
+  );
 
-  const updateCart = (index) => {
-    setCount((prevCount) => {
-      const updatedCount = { ...prevCount };
-      updatedCount[index] = 0;
-      return updatedCount;
-    });
-  };
+  // Abre o modal
+  const openModal = () => setModalIsOpen(true);
+
+  // Fecha o modal sem confirmar
+  const closeModal = () => setModalIsOpen(false);
 
   return (
     <section className="lg:w-[350px] mt-5">
@@ -42,33 +36,7 @@ export default function Cart({ count, setCount, products }) {
           Your Cart({totalCart})
         </span>
         <div className="py-3">
-          {Object.entries(productsCart).map(([index, product]) => (
-            <div key={index}>
-              <div className="flex items-center justify-between mb-2">
-                <div>
-                  <div>
-                    <p className="font-semibold text-sm">{product.name}</p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-red-500 font-bold text-[16px] ">
-                      {product.count}x
-                    </span>
-                    <span>@ ${product.price}</span>
-                    <span>${product.price * product.count}</span>
-                  </div>
-                </div>
-                <div>
-                  <motion.button
-                    className="cursor-pointer border-[1px] border-solid  rounded-full p-1"
-                    style={{ borderColor: 'rgb(173, 137, 133)' }}
-                    whileHover={{ opacity: 0.8 }}
-                    onClick={() => updateCart(index)}>
-                    <IconCartRemove />
-                  </motion.button>
-                </div>
-              </div>
-            </div>
-          ))}
+          <CartProductFilter />
         </div>
         <div className={cn('hidden', totalCart > 0 && 'block')}>
           <div className="flex items-center justify-between mb-3">
@@ -85,9 +53,14 @@ export default function Cart({ count, setCount, products }) {
             <button
               className={cn(
                 'cursor-pointer bg-red-500 text-white font-bold py-2 w-full rounded-[50px]'
-              )}>
+              )}
+              onClick={openModal}>
               Confirm Order
             </button>
+            <ModalOrderConfirmed
+              closeModal={closeModal}
+              modalIsOpen={modalIsOpen}
+            />
           </div>
         </div>
         <div

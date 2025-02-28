@@ -13,7 +13,6 @@ const CountProductProvider = ({ children }) => {
         image: item.image,
         price: item.price,
         category: item.category,
-        totalProductCart: count[index],
         count: 0,
       };
 
@@ -22,10 +21,20 @@ const CountProductProvider = ({ children }) => {
     setCount(initialData);
   }, []);
 
-  console.log(count);
+  // Função para atualizar a contagem sem permitir valores negativos
+  const updateCount = (index, value) => {
+    setCount((prevCount) => {
+      const newCount =
+        value === 0 ? 0 : Math.max((prevCount[index]?.count || 0) + value, 0);
+      return {
+        ...prevCount,
+        [index]: { ...prevCount[index], count: newCount },
+      };
+    });
+  };
 
   return (
-    <CountProductContext.Provider value={{ count, setCount }}>
+    <CountProductContext.Provider value={{ count, setCount, updateCount }}>
       {children}
     </CountProductContext.Provider>
   );

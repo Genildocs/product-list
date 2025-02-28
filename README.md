@@ -47,3 +47,32 @@ useEffect(() => {
   setProduct(data);
 }, []);
 ```
+
+- Uso do contextApi para evitar prop drilling. Uso do reduce para evitar loops desnecessarios. Uso do filter em conjunto com o map para filtragem eficiente de itens no carrinho.
+
+```
+ // const totalCart = Object.entries(count).reduce(
+  //   (acc, [_, value]) => acc + value.count,
+  //   0
+  // );
+
+  // const totalPrice = Object.entries(count).reduce(
+  //   (acc, [_, value]) => acc + value.price * value.count,
+  //   0
+  // );
+```
+
+- Uso mais eficiente do reduce
+
+```
+  const { totalCart, totalPrice } = Object.values(count).reduce(
+    (acc, product) => {
+      if (product.count > 0) {
+        acc.totalCart += product.count;
+        acc.totalPrice += product.price * product.count;
+      }
+      return acc;
+    },
+    { totalCart: 0, totalPrice: 0 }
+  );
+```

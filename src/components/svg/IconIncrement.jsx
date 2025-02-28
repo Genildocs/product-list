@@ -1,14 +1,11 @@
-import { useEffect } from 'react';
-
-export default function IconIncrement({ setCount, index }) {
+import { useContext, useEffect } from 'react';
+import { CountProductContext } from '../../CountProductContext';
+export default function IconIncrement({ index }) {
+  const { updateCount } = useContext(CountProductContext);
   return (
     <div
       className="border-[1px] border-solid border-white rounded-full p-1"
-      onClick={() =>
-        setCount((prevCount) => {
-          return { ...prevCount, [index]: prevCount[index] + 1 };
-        })
-      }>
+      onClick={() => updateCount(index, 1)}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="10"
