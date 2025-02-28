@@ -30,7 +30,18 @@ export default function Cart() {
   const closeModal = () => setModalIsOpen(false);
 
   return (
-    <section className="lg:w-[350px] mt-5">
+    <motion.section
+      className="lg:w-[350px] mt-5"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.5, ease: 'easeInOut' },
+      }}
+      viewport={{
+        amount: 'some',
+        once: true,
+      }}>
       <div className="bg-white p-5 rounded-lg shadow-(--shadow-cart)">
         <span className="font-bold text-2xl text-red-500">
           Your Cart({totalCart})
@@ -74,6 +85,6 @@ export default function Cart() {
           </p>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -33,9 +33,18 @@ export default function SectionProducts({ children }) {
                 src={`${product.image[getDeviceSize()].replace('./assets', '')}`}
                 alt={product.name}
                 className={cn(
-                  'rounded-lg w-full h-full object-contain border-[3px] border-solid border-transparent transition-all',
+                  'rounded-lg w-full h-full object-cover border-[3px] border-solid border-transparent transition-all',
                   product.count > 0 && 'border-red '
                 )}
+                initial={{ opacity: 0 }}
+                whileInView={{
+                  opacity: 1,
+                  transition: { duration: 0.3, ease: 'easeInOut' },
+                }}
+                viewport={{
+                  amount: 'some',
+                  once: true,
+                }}
               />
               <ButtonsCount index={index} product={product} />
             </div>

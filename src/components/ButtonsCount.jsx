@@ -24,7 +24,7 @@ export default function ButtonsCount({ index, product }) {
       {/* Button Add cart */}
       <motion.button
         className={cn(
-          'cursor-pointer w-40 flex items-center gap-2  px-5 py-3  rounded-[50px] absolute bottom-0  translate-x-[50%] md:translate-x-[20%] lg:translate-x-[30%] border-[1px] border-solid ',
+          'group overflow-hidden cursor-pointer w-40 flex items-center gap-2  px-5 py-3  rounded-[50px] absolute bottom-0  translate-x-[50%] md:translate-x-[20%] lg:translate-x-[30%] border-[1px] border-solid ',
           product.count === 0 && 'flex'
         )}
         style={{
@@ -43,7 +43,7 @@ export default function ButtonsCount({ index, product }) {
       {/* Button Count */}
       <motion.button
         className={cn(
-          'cursor-pointer bg-red-500 w-40 flex items-center justify-between gap-2  px-5 py-3  rounded-[50px] absolute bottom-0  translate-x-[50%] md:translate-x-[20%] lg:translate-x-[30%] border-[1px] border-solid border-red-500',
+          'cursor-pointer bg-red-500 w-40 flex items-center justify-between gap-2  px-5 py-3  rounded-full absolute bottom-0  translate-x-[50%] md:translate-x-[20%] lg:translate-x-[30%] border-[1px] border-solid border-red-500',
           product.count === 0 && 'hidden'
         )}
         initial={{ y: 50, opacity: 0 }}
